@@ -1,6 +1,7 @@
 ##What it do?
 What this does is scan through all of the possible kahoot pins and see which ones are active. It prints all of them out in a console window.
 
+Also please note that becasue this is written in python, it is really slow.
 ##Install
 * You must have Python3 installed
 * download or clone this 
