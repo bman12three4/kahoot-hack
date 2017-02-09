@@ -7,8 +7,8 @@ Also please note that becasue this is written in python, it is really slow.
 * download or clone this 
 
 ##Running
-* go into the directory and run play.py
-* you should be able to double click it, but if not then use python play.py in the console to start it
+* go into the directory and run `play.py`
+* you should be able to double click it, but if not then use `python play.py` in the console to start it
 * It gives out a list of pins which have recently been used
 
 
