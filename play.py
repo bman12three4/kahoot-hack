@@ -1,13 +1,3 @@
-####################################################
-#  Settings:                                       #
-####################################################
-
-_verify = True   #if the network filters https traffic
-                 #set to false to turn off verification
-
-
-
-####################################################
 import sys
 from main import kahoot, error
 import time
@@ -15,18 +5,10 @@ import time
 def get_input():
   try:
     name = sys.argv[1]
-    pin = sys.argv[2]
-    if (len(sys.argv) > 3):
-      if (sys.argv[3].lower() =='false'):
-        verify = False
-    else:
-        verify = True
   except:
-    pin = input("Please Enter the kahoot pin: ")
-    name = input("Please Enter your user name: ")
-    verify = _verify
+    name = input("name ")
   try:
-    return int(pin), str(name), bool(verify)
+    return str(name)
   except:
     print("Please input properly")
     error(0,"not proper input", True)
@@ -38,11 +20,26 @@ def esc():
     else:
       time.sleep(0.1)
 
-if __name__ == '__main__':
-  pin, name, verify = get_input()
-  print("connecting ...")
+def testConnection(pin, name):
   send = kahoot(pin, name)
-  send.verify = verify
-  send.connect()
-  send.run_game()
-  esc()
+  return send.testSession2(pin)
+
+def play(pin):
+  if __name__ == '__main__':
+    print("Initializing...")
+    send = kahoot(pin, name)
+    send.verify = True
+    print("Connecting...")
+    send.connect()
+    print("Running Game...")
+    send.run_game()
+    esc()
+
+
+name = get_input()
+
+for num in range(100000,9999999):
+  if testConnection(str(num), name):
+    print(str(num))
+  
+

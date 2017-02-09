@@ -115,7 +115,7 @@ class kahoot:
     data = [{"channel": "/service/controller", "clientId": self.clientid, "data": {"content": innerdata, "gameid": self.pin, "host": "kahoot.it", "id": 50, "type": "message"}, "id": subId}]
     return str(json.dumps(data))
 
-  def testSession(self):
+  def testSssion(self):
     pin = str(self.pin)
     timecode = str(get_tc())
     url = "https://kahoot.it/reserve/session/"+pin+"/?"+timecode
@@ -478,4 +478,18 @@ class kahoot:
       self.startQueue()
       self.setName(self.name)
     else:
-      error(909, "no game with pin", True)
+      error(909, "no game with pin", False)
+
+  def testSession2(self, pin):
+    timecode = str(get_tc())
+    url = "https://kahoot.it/reserve/session/"+pin+"/?"+timecode
+    r = self.s.get(url, verify=self.verify)
+    try:
+      data = json.loads(r.text)
+      self.kahoot_raw_session = r.headers['x-kahoot-session-token']
+      self.challenge = self.solve_kahoot_challenge(data['challenge'])
+      self.kahoot_session = self.kahoot_session_shift()
+      return True
+    except:
+      error(909, 'No kahoot Game with that pin', False, False)
+      return False
